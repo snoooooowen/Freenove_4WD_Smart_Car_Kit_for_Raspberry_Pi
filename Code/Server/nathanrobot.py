@@ -21,7 +21,7 @@ def fwd():
     time.sleep(1)
 def f():
     print("moving fast")
-    PWM.set_motor_model(-1500,-1500,-1500,-1500)
+    PWM.set_motor_model(-1600,-1600,-1500,-1500)
     time.sleep(2)
 def Bk():
     print("backing up")
@@ -38,7 +38,6 @@ def T180():
      PWM.set_motor_model(1000,1000,-1000,-1000)
      time.sleep(0.688) 
 try:
-    f()
     f()
     f()
     f()
