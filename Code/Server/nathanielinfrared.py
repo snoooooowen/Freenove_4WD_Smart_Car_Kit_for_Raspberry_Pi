@@ -1,8 +1,7 @@
-# Import the LineSensor class from gpiozero for reading infrared sensors
-from gpiozero import LineSensor
+from infrared import LineSensor
 import time
 
-# Define the Infrared class to manage infrared sensors
+
 class Infrared:
     def __init__(self):
         # Define the GPIO pins for each infrared sensor
@@ -30,7 +29,7 @@ class Infrared:
         for sensor in self.sensors.values():
             sensor.close()
 
-# Main entry point for testing the Infrared class
+
 if __name__ == '__main__':
     # Create an Infrared object
     infrared = Infrared()
@@ -39,8 +38,11 @@ if __name__ == '__main__':
         while True:
             infrared_value = infrared.read_all_infrared()
             print(f"Infrared value: {infrared_value}")
-
             time.sleep(0.5)
+            
+            if infrared_value == 2:
+                print("move ")
+
     except KeyboardInterrupt:
         # Close the Infrared object and print a message when interrupted
         infrared.close()
