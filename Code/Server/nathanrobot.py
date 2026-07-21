@@ -37,9 +37,8 @@ def T180():
      print("turning 180")
      PWM.set_motor_model(1000,1000,-1000,-1000)
      time.sleep(0.688) 
+
 try:
-    f()
-    f()
     f()
 
 except KeyboardInterrupt:
