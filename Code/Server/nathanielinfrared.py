@@ -14,7 +14,8 @@ if __name__ == '__main__':
             infrared_value = sensors.read_all_infrared()
             print(f"Infrared value: {infrared_value}")
             time.sleep(0.01)
-
+            
+        
             if infrared_value == 6:
                 print("far right")
                 PWM.set_motor_model(-700, -700, 500 , 500)
@@ -42,6 +43,7 @@ if __name__ == '__main__':
             elif infrared_value==2:
                 print ("middle wierd")
                 PWM.set_motor_model(-500, -500, 500, 500)
+
             else:
                 print ("oh no")
                 PWM.set_motor_model(0, 0, 0, 0)

@@ -44,6 +44,6 @@ if __name__ == '__main__':
                 distance = ultrasonic.get_distance()  # Get the distance measurement in centimeters
                 if distance is not None:
                     print(f"Ultrasonic distance: {distance}cm")  # Print the distance measurement
-                time.sleep(0.5)  # Wait for 0.5 seconds
+                time.sleep(0.01)  # Wait for 0.01 seconds
         except KeyboardInterrupt:  # Handle keyboard interrupt (Ctrl+C)
             print("\nEnd of program")  # Print an end message
