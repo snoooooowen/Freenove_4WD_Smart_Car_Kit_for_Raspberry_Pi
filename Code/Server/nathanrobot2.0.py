@@ -39,7 +39,7 @@ def T180():
      time.sleep(0.688) 
 
 try:
-    f()
+    T180()
 
 except KeyboardInterrupt:
         print("Program interrupted by user.")
