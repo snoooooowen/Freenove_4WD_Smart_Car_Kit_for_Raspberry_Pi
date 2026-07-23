@@ -13,10 +13,14 @@ sensors = Infrared()
 
 def T180():
      print("turning 180")
-     PWM.set_motor_model(1000,1000,-1000,-1000)
-     time.sleep(0.688) 
+     PWM.set_motor_model(700,700,-700,-700)
+     time.sleep(1) 
 
-def avoid_obstacle():
+     PWM.set_motor_model(0, 0, 0, 0)
+     time.sleep(0.3)
+     
+
+def avoid_obstacle_L():
     print("Avoiding obstacle...")
     # Stop
     PWM.set_motor_model(0, 0, 0, 0)
@@ -24,15 +28,41 @@ def avoid_obstacle():
 
     # slide lefy
     PWM.set_motor_model(600, -600, -600, 600)
-    time.sleep(1)
+    time.sleep(0.8)
 
     # Drive past the obstacle
     PWM.set_motor_model(-600, -600, -600, -600)
-    time.sleep(1.3)
+    time.sleep(0.9)
 
     #slide right
     PWM.set_motor_model(-600, 600, 600, -600)
-    time.sleep(1)
+    time.sleep(0.8)
+
+    # Stop briefly before resuming line following
+    PWM.set_motor_model(0, 0, 0, 0)
+    time.sleep(0.3)
+
+    print("Obstacle avoided.")
+
+
+def avoid_obstacle_R():
+    
+    print("Avoiding obstacle...")
+    # Stop
+    PWM.set_motor_model(0, 0, 0, 0)
+    time.sleep(0.5)
+
+    # slide right
+    PWM.set_motor_model(-600, 600, 600, -600)
+    time.sleep(0.9)
+
+    # Drive past the obstacle
+    PWM.set_motor_model(-600, -600, -600, -600)
+    time.sleep(0.9)
+
+    #slide left
+    PWM.set_motor_model(600, -600, -600, 600)
+    time.sleep(0.9)
 
     # Stop briefly before resuming line following
     PWM.set_motor_model(0, 0, 0, 0)
@@ -55,20 +85,25 @@ if __name__ == '__main__':
                 time.sleep(0.01)
 
                 # Obstacle detected
-                if distance is not None and distance <= 20:
+                if distance is not None and distance <= 20.5:
                     PWM.set_motor_model(0, 0, 0, 0)
 
                     while True:
                         choice = input(
                             "\nObstacle detected!\n"
-                            "Type 'move' to go around it\n"
+                            "Type 'move left' to go around left\n"
+                            "Type 'move right' to go around right\n"
                             "Type 'goal' if this is the destination and you would like to turn around\n> "
-                            "Type 'done' if you are done"
+                            "Type 'done' if you are done: "
                         ).strip().lower()
 
-                        if choice == "move":
-                            avoid_obstacle()
+                        if choice == "move left":
+                            avoid_obstacle_L()
                             break      # Continue line following
+
+                        elif choice == "move right":
+                            avoid_obstacle_R()
+                            break
 
                         elif choice == "done":
                             print("finished")
@@ -107,7 +142,7 @@ if __name__ == '__main__':
 
                 elif infrared_value == 7:
                     print("did we finish")
-                    PWM.set_motor_model(500, 500, 500, 500)
+                    PWM.set_motor_model(700, 700, 700, 700)
 
                 elif infrared_value == 2:
                     print("middle weird")
@@ -116,6 +151,7 @@ if __name__ == '__main__':
                 else:
                     print("oh no")
                     PWM.set_motor_model(0, 0, 0, 0)
+
 
     except KeyboardInterrupt:
         sensors.close()
