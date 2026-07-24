@@ -18,7 +18,7 @@ def T180():
 
      PWM.set_motor_model(0, 0, 0, 0)
      time.sleep(0.3)
-     
+
 
 def avoid_obstacle_L():
     print("Avoiding obstacle...")
@@ -36,7 +36,7 @@ def avoid_obstacle_L():
 
     #slide right
     PWM.set_motor_model(-600, 600, 600, -600)
-    time.sleep(0.8)
+    time.sleep(0.9)
 
     # Stop briefly before resuming line following
     PWM.set_motor_model(0, 0, 0, 0)
@@ -46,23 +46,23 @@ def avoid_obstacle_L():
 
 
 def avoid_obstacle_R():
-    
+
     print("Avoiding obstacle...")
     # Stop
     PWM.set_motor_model(0, 0, 0, 0)
     time.sleep(0.5)
 
     # slide right
-    PWM.set_motor_model(-600, 600, 600, -600)
-    time.sleep(0.9)
+    PWM.set_motor_model(-700, 700, 700, -700)
+    time.sleep(0.7)
 
     # Drive past the obstacle
     PWM.set_motor_model(-600, -600, -600, -600)
     time.sleep(0.9)
 
     #slide left
-    PWM.set_motor_model(600, -600, -600, 600)
-    time.sleep(0.9)
+    PWM.set_motor_model(700, -700, -700, 700)
+    time.sleep(0.75)
 
     # Stop briefly before resuming line following
     PWM.set_motor_model(0, 0, 0, 0)
@@ -83,6 +83,7 @@ if __name__ == '__main__':
                 infrared_value = sensors.read_all_infrared()
                 print(f"Infrared value: {infrared_value}")
                 time.sleep(0.01)
+
 
                 # Obstacle detected
                 if distance is not None and distance <= 20.5:
